@@ -1,56 +1,14 @@
-
-
-
-let promError = false;
-
-function getPromise() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log("1");
-            if(promError){
-                reject("hat nicht geklappt");
-            }else{
-                resolve("hat geklappt");
-            }
-        }, 1000);
-    });
-}
-
-function getPromise2() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log("2");
-            if(!promError){
-                reject("hat nicht geklappt");
-            }else{
-                resolve("hat geklappt");
-            }
-        }, 1000);
-    });
-}
-
-function getPromise3() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log("3");
-            if(promError){
-                reject("hat nicht geklappt");
-            }else{
-                resolve("hat geklappt");
-            }
-        }, 1000);
-    });
+function init(){
+    importFruits();
 }
 
 
-async function usePromise() {
-    try {
-        await getPromise();
-        await getPromise2();
-        await getPromise3();
-        console.log("juhuuuu");
-    } catch (error) {
-        console.error(error);
-    }
-    console.log("ende");
+async function fetchDataJson(){
+    let response = await fetch('https://www.fruityvice.com/api/fruit/all');
+    let responseAsJson = await response.json();
+    console.log("hat geklappt");
+}
+
+function importFruits(){
+    fetchDataJson();
 }
